@@ -7,7 +7,7 @@ docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v $(pwd):/var/www/html \
     -w /var/www/html \
-    laravelsail/php81-composer:latest \
+    brayand/fullstack-project-template-composer:1.0.0 \
     composer install --ignore-platform-reqs
 ```
 
