@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    networks:
+      - xprojectname-local
+    command: npm run dev
+
+networks:
+  xprojectname-local:
+    driver: bridge
+    external: true

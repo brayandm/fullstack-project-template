@@ -1,0 +1,10 @@
+#!/bin/sh
+
+pushd backend
+files=$(git diff --cached --name-only --diff-filter=ACM -- '*.php');
+vendor/bin/pint $files
+popd
+
+pushd frontend
+npx prettier --write .
+popd

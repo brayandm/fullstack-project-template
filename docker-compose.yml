@@ -1,0 +1,46 @@
+version: '3'
+services:
+  laravel.test:
+    image: xprojectname-backend
+    restart: always
+    volumes:
+      - backend-storage:/app/storage
+    depends_on:
+      - mysql
+    command: /docker-start.sh
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:80 || exit 1" ]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+      start_period: 20s
+
+  mysql:
+    image: xprojectname-mysql
+    restart: always
+    volumes:
+      - 'backend-mysql:/var/lib/mysql'
+
+  frontend:
+    image: xprojectname-frontend
+    restart: always
+    ports:
+      - ${APP_PORT:-49160}:3000
+    depends_on:
+      laravel.test:
+        condition: service_healthy
+    command: npm run start
+
+  phpmyadmin:
+    image: brayand/fullstack-project-template-phpmyadmin:1.0.0
+    restart: always
+    environment:
+        PMA_HOST: mysql
+    ports:
+    - '127.0.0.1:${PHPMYADMIN_PORT:-49161}:80'
+    depends_on:
+      - mysql
+
+volumes:
+  backend-mysql:
+  backend-storage:

@@ -1,0 +1,16 @@
+services:
+  laravel.test:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-php8
+    image: xprojectname-backend
+
+  mysql:
+    build:
+      context: .
+      args:
+        DB_USERNAME: ${DB_USERNAME}
+        DB_PASSWORD: ${DB_PASSWORD}
+        DB_DATABASE: ${DB_DATABASE}
+      dockerfile: docker/Dockerfile-mysql
+    image: xprojectname-mysql
