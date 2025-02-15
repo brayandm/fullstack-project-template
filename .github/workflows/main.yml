@@ -1,0 +1,27 @@
+name: xprojectname
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    deploy:
+        runs-on:
+            - self-hosted
+
+        steps:
+            - uses: actions/checkout@v3
+            - name: Copying .env to frontend project
+              run: echo "${{ vars.FRONTEND }}" > frontend/.env
+            - name: Copying .env to backend project
+              run: echo "${{ vars.BACKEND }}" > backend/.env
+            - name: Building the containers
+              run: bash build.sh
+            - name: Stopping the containers
+              run: docker compose down
+            - name: Starting the containers
+              run: docker compose  up -d
+            - name: Removing unused docker images
+              run: docker images --filter "reference=xprojectname*" -q | xargs -r docker rmi -f

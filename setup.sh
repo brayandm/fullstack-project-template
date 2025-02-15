@@ -11,6 +11,7 @@ project_name=$1
 project_name_formatted=$(echo "$1" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 
 sed -i "s/xprojectname/$project_name/g" README.md
+sed -i "s/xprojectname/$project_name_formatted/g" .github/workflows/main.yml
 sed -i "s/xprojectname/$project_name_formatted/g" docker-compose.yml
 sed -i "s/xprojectname/$project_name_formatted/g" frontend/docker-compose.build.yml
 sed -i "s/xprojectname/$project_name_formatted/g" frontend/docker-compose.yml
