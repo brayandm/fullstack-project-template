@@ -24,4 +24,4 @@ jobs:
             - name: Starting the containers
               run: docker compose  up -d
             - name: Removing unused docker images
-              run: docker images --filter "reference=xprojectname*" -q | xargs -r docker rmi -f
+              run: docker image prune -f
