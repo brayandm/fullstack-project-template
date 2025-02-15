@@ -19,3 +19,7 @@ sed -i "s/xprojectname/$project_name_formatted/g" frontend/README.md
 sed -i "s/xprojectname/$project_name_formatted/g" backend/docker-compose.build.yml
 sed -i "s/xprojectname/$project_name_formatted/g" backend/docker-compose.yml
 sed -i "s/xprojectname/$project_name_formatted/g" backend/README.md
+
+sed -i '/### Change Project Name/,/```/d' README.md
+
+rm setup.sh
