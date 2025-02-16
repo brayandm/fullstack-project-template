@@ -1,5 +1,5 @@
 #!/bin/bash
 
-./vendor/bin/sail artisan migrate:fresh
+docker compose exec laravel.test php artisan migrate:fresh
 
-./vendor/bin/sail artisan db:seed
+docker compose exec laravel.test php artisan db:seed
